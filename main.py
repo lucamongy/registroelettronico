@@ -3,21 +3,28 @@ from DBManager import DBManager
 from Professore import Professore
 from Materia import Materia
 
-studentsList = []
-subjectsList = []
-professorsList = []
+studentsList = DBManager.sread()
+subjectsList = DBManager.sbread()
+professorsList = DBManager.pread()
 
-menu = "\n\n\n--- Menu' ---\n1- Modalità inserimento\n2- Modalità Lista\n3- Inserisci nuovo studente\n-------------"
+menu = "\n\n\n--- Menu' ---\n1- Modalità inserimento\n2- Modalità Lista\n-------------"
 insmenu = "\n\n\n--- Menu' ---\n1- Inserisci nuova materia\n2- Inserisci nuovo professore\n3- Inserisci nuovo studente\n-------------"
 listmenu = "\n\n\n--- Menu' ---\n1- Mostra lista studenti\n2- Mostra lista materie\n3- Mostra lista professori\n-------------"
 cmd = ''
-print(menu)
+
+subjectsList.append(Materia("Matematica","MT255","Matematica"))
+
+professorsList.append(Professore("John","Smith","1232","MT255"))
+
+studentsList.append(Studente("Luca","Mongiardo"))
+studentsList.append(Studente("Johnny","Sins"))
+
 
 while cmd != 'q':
-    cmd = input("Inserire operazione (q per uscire, m per menu'):\t").lower()
+    cmd = input(menu+"\nInserire operazione (q per uscire):\t").lower()
     if cmd == '1':
         print(insmenu)
-        cmd = input("Inserire operazione (q per uscire, m per menu'):\t").lower()
+        cmd = input("Inserire operazione (q per uscire):\t").lower()
         if cmd == '1':
             subjectsList.append(Materia.inserimento())
         elif cmd == '2':
@@ -28,7 +35,7 @@ while cmd != 'q':
             cmd = ''
     elif cmd == '2':
         print(listmenu)
-        cmd = input("Inserire operazione (q per uscire, m per menu'):\t").lower()
+        cmd = input("Inserire operazione (q per uscire):\t").lower()
         if cmd == '1':
             for s in studentsList:
                 print(s)
@@ -40,23 +47,7 @@ while cmd != 'q':
                 print(p)
         elif cmd == 'q':
             cmd = ''
-    elif cmd == 'm':
-        print(menu)
-
-
-
-
-
-subjectsList.append(Materia("Matematica","MT255","Matematica"))
-
-professorsList.append(Professore("John","Smith","1232","MT255"))
-
-studentsList.append(Studente("Luca","Mongiardo"))
-studentsList.append(Studente("Johnny","Sins"))
-
-DBManager.writeall(studentsList,professorsList,subjectsList)
-
-
+    DBManager.writeall(studentsList,professorsList,subjectsList)
 
 
 """

@@ -40,10 +40,16 @@ class Studente:
         nome = input("Inserire nome: ")
         cognome = input("Inserire cognome: ")
         cf = input("Inserire codice fiscale (facoltativo): ")
-        anno = int(input("Inserire anno (facoltativo): "))
+        if cf == "":
+            cf = "null"
+        anno = input("Inserire anno (facoltativo): ")
         if anno == "":
             anno = 0
+        else:
+            anno=int(anno)
         sezione = input("Inserire sezione (facoltativo): ")
+        if sezione == "":
+            sezione = "null"
         return Studente(nome,cognome,cf,anno,sezione)
 
     def __str__(self):
